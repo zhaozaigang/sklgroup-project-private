@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<style name="Theme" parent="android:Theme">
+	</style>
+	<style name="Theme.Default">
+		<item name= "android:textViewStyle">@style/TextView</item>
+		<item name= "android:buttonStyle">@style/Button</item>
+	</style>
+	
+	<style name="im_button">
+		<item name="android:color">#cccccc</item>
+		<item name="android:layout_width">50dip</item>
+		<item name="android:layout_height">45dip</item>
+	</style>
+	
+	<style name="Button" parent="@android:style/Widget.Button">
+		<item name="android:textSize">18sp</item>
+		<item name="android:textColor">@color/textColor</item>
+		<item name="android:background">@drawable/selector_btn</item>
+	</style>
+	<style name="Button.White">
+		<item name="android:textSize">18sp</item>
+		<item name="android:textColor">@android:color/white</item>
+	</style>
+	<style name="CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:button">@drawable/selector_checkbox</item>
+		<item name="android:paddingLeft">20.0dp</item>
+	</style>
+	
+	<style name="TextView" parent="@android:style/Widget.TextView">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:textColor">@android:color/black</item>
+	</style>
+	<style name="TextView.Left">
+		<item name="android:gravity">center_vertical</item>
+	</style>
+	<style name="TextView.Label">
+		<item name="android:gravity">center_vertical|left</item>
+		<item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+	</style>
+	<style name="TextView.Key">
+		<item name="android:gravity">center_vertical|right</item>
+		<item name="android:textSize">18sp</item>
+	</style>
+	<style name="TextView.Value" parent="@android:style/Widget.TextView">
+		<item name="android:textColor">#cccccc</item>
+	</style>
+	 <style name="Input_Edit">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:background">@drawable/selector_text_input</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingTop">5.0dip</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:paddingBottom">5.0dip</item>
+        <item name="android:gravity">top|left</item>
+    </style>
+	
+	<style name="FieldSet">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">10dp</item>
+		<item name="android:layout_marginRight">10dp</item>
+		<item name="android:layoutAnimation">@anim/layout_detail</item>
+	</style>
+	<style name="FieldSetTitle">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">15dp</item>
+		<item name="android:layout_marginLeft">10dp</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:textColor">@android:color/black</item>
+	</style>
+	<style name="Field">
+		<item name="android:focusable">true</item>
+		<item name="android:clickable">true</item>
+		<item name="android:background">@drawable/selector_group_item</item>
+	</style>
+	<style name="Field.First">
+		<item name="android:layout_marginTop">10dp</item> 
+		<item name="android:background">@drawable/selector_group_first</item>
+	</style>
+	<style name="Field.Last">
+		<item name="android:background">@drawable/selector_group_last</item>
+	</style>
+	<style name="Field.Single">
+		<item name="android:layout_marginTop">10dp</item> 
+		<item name="android:background">@drawable/selector_group_single</item>
+	</style>
+	<style name="FieldName" parent="@android:style/Widget.TextView">
+		<item name="android:focusable">false</item>
+		<item name="android:clickable">false</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">@android:color/black</item>
+		<item name="android:paddingTop">10dp</item>
+		<item name="android:paddingBottom">10dp</item>
+	</style>
+	<style name="FieldName.Required" >
+		<item name="android:drawableLeft">@drawable/required</item>
+	</style>
+	
+	<style name="FieldValue">
+		<item name="android:layout_marginLeft">10dp</item> 
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">@android:color/black</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:gravity">center_vertical|right</item>
+	</style>
+	<style name="FieldValue.More" >
+		<item name="android:drawableRight">@drawable/btn_ic_nex</item>
+	</style>
+	<style name="FieldValue.Edit" >
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">@drawable/selector_text_input</item>
+        <item name="android:paddingLeft">10.0dp</item>
+        <item name="android:paddingTop">5.0dp</item>
+        <item name="android:paddingRight">10.0dp</item>
+        <item name="android:paddingBottom">5.0dp</item>
+	</style>
+	<style name="ListView" parent="@android:style/Widget.ListView">
+	   <item name="android:listSelector">@drawable/selector_group_item</item>
+	   <item name="android:animationCache">false</item>
+	   <item name="android:layoutAnimation">@anim/layout_list</item>
+  	   <item name="android:cacheColorHint">@android:color/transparent</item>
+       <item name="android:divider">#cccccc</item>
+       <item name="android:dividerHeight">1px</item>
+	</style>
+	<color name="gray">#cccccc</color>
+	<color name="activity_backgrond">@android:color/white</color>
+	<color name="textColor">#000000</color>
+</resources>

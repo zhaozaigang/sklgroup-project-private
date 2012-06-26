@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+     >
+    <LinearLayout
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:background="@drawable/login_top">
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="center_horizontal"
+	        android:src="@drawable/login_logo"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+	     android:layout_height="fill_parent"
+	     android:layout_weight="1">
+	    <TableLayout 
+ 		style= "@style/FieldSet"
+		android:stretchColumns="1">
+		 <TextView android:layout_span="2"  android:text="基本设置" style="@style/TextView.Label" />
+		 <TableRow style="@style/Field.First"  >
+		 	<TextView style="@style/FieldName.Required"  android:text="用户名:" />
+		 	<EditText style="@style/FieldValue.Edit" android:id="@+id/edit_loginame" android:hint="@string/HINT_LOGINAME" />
+		 </TableRow>
+		 <TableRow style="@style/Field.Last"  >
+		 	<TextView style="@style/FieldName.Required"  android:text="密码:" />
+		 	<EditText style="@style/FieldValue.Edit" android:id="@+id/edit_password" android:hint="@string/HINT_PASSWORD" />
+		 </TableRow>
+		 <TextView android:layout_span="2"  android:text="高级设置" style="@style/TextView.Label" />
+		 <TableRow style="@style/Field.First" >
+		 	<TextView style="@style/FieldName" android:text="更新频率" />
+		 	<TextView style="@style/FieldValue.More" android:id="@+id/txt_interval"/>
+		 </TableRow>
+		  <TableRow style="@style/Field.Last" >
+		 	<TextView style="@style/FieldName" android:text="检查版本" />
+		 	<TextView style="@style/FieldValue.More" android:layout_height="fill_parent" android:id="@+id/txt_version"/>
+		 </TableRow>
+		 
+		 	<LinearLayout 
+		 		android:padding="20dp"
+		 		android:layout_span="2" 
+		 		android:orientation="horizontal"
+		 			android:layout_width="fill_parent"
+	    			android:layout_height="wrap_content">
+	    		<TextView 
+	    			android:layout_weight="1"
+	    			android:layout_width="0dp"
+	    			android:layout_height="wrap_content"/>
+	    		<Button
+	    			android:id="@+id/btn_cancel"
+	    			android:text="@string/GENERAL_CANCEL"
+	    			android:layout_width="wrap_content"
+	    			android:layout_height="wrap_content"/>
+		 		<Button 
+		 			android:id="@+id/btn_save"
+		 			android:layout_marginLeft="30dp" 
+	    			android:text="@string/GENERAL_SAVE"
+		 			android:layout_width="wrap_content"
+	    			android:layout_height="wrap_content"/>
+	    		
+		 	</LinearLayout>
+	</TableLayout>
+    </LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:orientation="vertical"> 
+	     <TextView 
+	     	android:text="@string/copyrigth" 
+	     	android:gravity="right"
+	     	android:singleLine="true"
+	     	android:ellipsize="marquee"
+	     	android:background="@drawable/title_bg"
+	     	android:focusableInTouchMode="true"
+	     	android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
+	     <QuickContactBadge android:id="@+id/quickContactBadge1" android:layout_width="wrap_content" android:layout_height="wrap_content"></QuickContactBadge>
+	</LinearLayout>
+</LinearLayout>

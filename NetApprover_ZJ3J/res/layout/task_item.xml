@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/title_id" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:paddingTop="5dp"
+	android:paddingBottom="5dp"
+	>
+	<ImageView
+		android:id="@+id/img_ico"
+		android:layout_width="70dp"
+		android:layout_height="50dp"
+		android:layout_alignParentLeft="true"
+		android:layout_marginRight="2dp"
+		android:src="@drawable/doc"/>
+	<TextView android:id="@+id/txt_sender"
+		style="@style/TextView"
+		android:layout_width="70dp"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/img_ico"
+		android:gravity="center_horizontal"
+		android:singleLine="true"
+		android:ellipsize="marquee"
+		android:textSize="14sp"
+		android:textStyle="bold"
+		android:text="王桂红"
+	/>
+	<TextView android:id="@+id/txt_name"
+		style="@style/TextView.Label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/img_ico"
+		android:layout_alignParentTop="true"
+		android:singleLine="true"
+		android:textSize="16sp"
+		android:text="晋江世贸人工湖项目工程"
+		/>
+	<LinearLayout
+		android:id="@+id/layout_center"
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/txt_name"
+		android:layout_alignLeft="@id/txt_name"
+	>
+	<TextView android:id="@+id/txt_risk"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:singleLine="true"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:text="风险等级"
+		/>
+	<RatingBar
+		android:id="@+id/rat_risk"
+		
+		style="?android:attr/ratingBarStyleSmall"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:numStars="5"
+		android:rating="1"
+		/>
+	</LinearLayout>
+	<TextView android:id="@+id/txt_org"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@id/txt_name"
+		android:layout_alignBottom="@id/txt_sender"
+		android:singleLine="true"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:text="安装分公司"
+		/>
+	<TextView 
+		android:id="@+id/txt_date" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:singleLine="true" 
+		android:textStyle="bold" 
+		android:text="2012-01-07" 
+		android:textSize="16sp" 
+		android:layout_alignParentRight="true"
+		android:layout_alignBottom="@id/txt_sender"/>
+</RelativeLayout>

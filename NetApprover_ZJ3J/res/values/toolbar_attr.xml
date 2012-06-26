@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="ToolBar">
+		<attr name="firstDrawable" format="color|reference"/>
+		<attr name="lastDrawable" format="color|reference" />
+		<attr name="itemDrawable" format="color|reference"/>
+	</declare-styleable>
+</resources>

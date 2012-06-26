@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+	>
+	<include layout="@layout/title"/>
+	<TableLayout 
+ 		style= "@style/FieldSet"
+		android:stretchColumns="1">
+		 <TableRow style="@style/Field.First"  >
+		 	<TextView style="@style/FieldName" android:id="@+id/txt_address" android:text="名称" />
+		 	<TextView style="@style/FieldValue" android:id="@+id/edit_address" android:text="晋江世贸人工湖项目工程" />
+		 </TableRow>
+		<TableRow style="@style/Field">
+			<TextView style="@style/FieldName" android:text="是否同意" />
+			<RadioGroup style="@style/FieldValue" 
+				android:orientation="horizontal">
+			 	<RadioButton style="@style/CheckBox" android:textColor="@color/gray" android:text="同意"/>
+			 	<RadioButton style="@style/CheckBox"  android:layout_marginLeft="10dp" android:textColor="@color/gray" android:text="不同意"/>
+		 	</RadioGroup>
+		 </TableRow>
+		 <TableRow style="@style/Field" >
+		 	<TextView style="@style/FieldName" android:text="下一步" />
+		 	<TextView style="@style/FieldValue.More"  android:id="@+id/txt_next"/>
+		  </TableRow>
+	</TableLayout>
+	<EditText 
+		style="@style/Input_Edit"
+		android:id="@+id/edit_remark" 
+		android:hint="请输入你的转交意见"
+		android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:layout_weight="1" 
+    	android:layout_marginLeft="10dp"
+    	android:layout_marginRight="10dp"/>
+</LinearLayout>
+  
+
+	
+	
+	
