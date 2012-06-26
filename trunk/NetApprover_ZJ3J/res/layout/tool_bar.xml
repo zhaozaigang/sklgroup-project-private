@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="40dp"
+	android:background="@drawable/bottom_bg" 
+	android:gravity="center">
+	<cn.sklgroup.netApprover.view.ToolBar 
+		android:id="@+id/toolbar_id" 
+		xmlns:tool="http://schemas.android.com/apk/res/cn.sklgroup.netApprover"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		tool:firstDrawable="@drawable/selector_bar_left"
+		tool:itemDrawable="@drawable/selector_bar_item"
+		tool:lastDrawable="@drawable/selector_bar_right"
+		android:gravity="center_vertical">
+		<Button android:id="@+id/tools_btn_left"
+			style= "@style/TextView.Label"
+			android:layout_gravity="center_horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			
+			android:text="@string/TASK_INFO"/>
+		<Button android:id="@+id/tools_btn_middle"
+			style= "@style/TextView.Label"
+			android:layout_gravity="center_horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			
+			
+			android:text="@string/TASK_COMMENT"
+			/>
+		<Button android:id="@+id/tools_btn_right"
+			style= "@style/TextView.Label"
+			android:layout_gravity="center_horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:text="@string/TASK_RECORD"
+			/>
+	</cn.sklgroup.netApprover.view.ToolBar>
+</LinearLayout>
