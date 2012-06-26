@@ -19,7 +19,6 @@
 	<string name="GENERAL_SEND">发送</string>
 	<string name="GENERAL_EXIT">退出</string>
 	<string name="GENERAL_SET">设置</string>
-	<string name="GENERAL_CLOSE">关闭推送</string>
 	
 	<string name="GENERAL_CANNOT_USE">此版本暂不支持该功能</string>
 	<string name="GENERAL_PROCESS">解析</string>
@@ -89,6 +88,11 @@
 		<item>1800000</item>
 		<item>3600000</item>
 	</integer-array>
+	<string name="ENABLE_PUSH">开启推送</string>
+	<string name="DISABLE_PUSH">关闭推送</string>
+	
+	<string name="ENABLE_PUSH_MSG">推送已开启</string>
+	<string name="DISABLE_PUSH_MSG">推送已关闭</string>
 	
 	<string name="HINT_LOGINAME">请输入用户名</string>
 	<string name="HINT_PASSWORD">请输入密码</string>

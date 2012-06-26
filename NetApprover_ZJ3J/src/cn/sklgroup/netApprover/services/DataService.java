@@ -67,25 +67,24 @@ public class DataService extends Service{
 					try {
 						String result = "";
 						if(init){
-							result = request(new String[]{"service","message"},new String[]{"args",AppSetting.USER},new String[]{"args","true"});
+							result = request(new String[]{"s","m"},new String[]{"a",AppSetting.USER},new String[]{"a","1"});
 							init = false;
 						}else{
-							result = request(new String[]{"service","message"},new String[]{"args",AppSetting.USER});
+							result = request(new String[]{"s","m"},new String[]{"a",AppSetting.USER});
 							init = true;
 						}
 						Log.d(TAG, result);
 						
 						if(!"".equals(result)){
 							Map<String,?> json = (Map<String, ?>) JSONUtil.decode(result);
-							if("true".equals(json.get("sucess"))){
-								if("".equals(json.get("title")))
+							if("1".equals(json.get("s")+"")){
+								if("".equals(json.get("t")))
 									return;
 								Message msg= handler.obtainMessage(MESSAGE_NOTIFI);
 								Bundle bundle = new Bundle();
-								bundle.putString("title", json.get("title")+"");
-								bundle.putString("message", json.get("message")+"");
-								bundle.putString("link", json.get("link")+"");
-								bundle.putString("len", json.get("len")+"");
+								bundle.putString("title", json.get("t")+"");
+								bundle.putString("message", json.get("m")+"");
+								bundle.putString("len", json.get("l")+"");
 								msg.setData(bundle);
 								handler.sendMessage(msg);
 							}
@@ -98,7 +97,6 @@ public class DataService extends Service{
 		}}).start();
 	}
 	private final int MESSAGE_NOTIFI = 0x12300; 
-	private final int MESSAGE_ERROR = 0x12400; 
 	Handler handler = new Handler(){
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -108,11 +106,11 @@ public class DataService extends Service{
 					break;
 				
 				
-				if("".equals(bundle.getString("link")))
+				//if("".equals(bundle.getString("link")))
 					showRunNotification(DataService.this,bundle);
-				else 
-					showNotification(bundle.getString("title"), bundle.getString("message"), bundle.getString("link"));
-				
+//				else 
+//					showNotification(bundle.getString("title"), bundle.getString("message"), bundle.getString("link"));
+//				
 				break;
 			default:
 				break;
@@ -184,10 +182,10 @@ public class DataService extends Service{
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		notification.defaults = Notification.DEFAULT_ALL;
 		
-//		Intent intent = new Intent();
-//		intent.putExtra(WebActivity.EXTRA_LINK, link);
-//		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//		notification.setLatestEventInfo(this,title, remark, pendingIntent);
+		Intent intent = new Intent();
+		intent.putExtra(WebActivity.EXTRA_LINK, link);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		notification.setLatestEventInfo(this,title, remark, pendingIntent);
 //		
 		RemoteViews remoteViews = new RemoteViews(this.getPackageName(),R.layout.notifying_item);
 		
@@ -203,6 +201,24 @@ public class DataService extends Service{
 		NotificationManager mfm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		mfm.cancel(R.string.app_name);
 	}
+	
+	
+	public static boolean login(String loginame,String password){
+		Map<String,?> data = null;
+		boolean result = false;
+		try{
+			String jsonStr =  DataService.request(new String[]{"s","l"}, new String[]{"a",loginame},new String[]{"a",password});
+			data = (Map<String, ?>) JSONUtil.decode(jsonStr);
+			result = "1".equals(data.get("s")+"");
+			if(!result)
+				throw new RuntimeException(data.get("m")+"");
+		}catch (Exception e) {
+			if(data==null)
+				throw new RuntimeException("连接网络失败",e);
+		}
+		return result;
+	}
+	
 	
 	public static String request(String[]... args){
 		
@@ -240,8 +256,9 @@ public class DataService extends Service{
 			post.abort();
 			client = null;
 		}
-		
+		Log.d(TAG,result.toString());
 		return result.toString();
 	}
+	
 	
 }

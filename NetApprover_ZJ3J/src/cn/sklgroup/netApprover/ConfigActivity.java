@@ -144,7 +144,7 @@ public class ConfigActivity extends BaseActivity {
 		return result;
     } 
     private void login(){
-    	final String loginname = editLoginame.getText().toString();
+    	final String loginame = editLoginame.getText().toString();
     	final String password = editPassword.getText().toString();
     	progressDialog.setTitle(R.string.GENERAL_TIP);
     	progressDialog.setMessage(getText(R.string.GENERAL_NET_PROCESS));
@@ -154,19 +154,10 @@ public class ConfigActivity extends BaseActivity {
 			@Override
 			public void run() {
 				try {
-					String result =  DataService.request(new String[]{"service","message"}, new String[]{"args",loginname},new String[]{"args",password});
-					Map<String,?> data = (Map<String, ?>) JSONUtil.decode(result);
-					if("true".equals(data.get("sucess")))
+					if(DataService.login(loginame, password))
 						handler.sendEmptyMessage(MESSGE_SUCCESS);
-					else{ 
-						String text = data.get("message")==null?"登陆失败":data.get("message")+"";
-						Message msg = handler.obtainMessage(MESSGE_MESSAGE,text);
-						handler.sendMessage(msg);
-						
-					}
 				} catch (Exception e) {
-					String text = "连接服务器失败";
-					Message msg = handler.obtainMessage(MESSGE_MESSAGE,text);
+					Message msg = handler.obtainMessage(MESSGE_MESSAGE,e.getMessage());
 					handler.sendMessage(msg);
 				}
 				

@@ -25,9 +25,10 @@ public class AppSetting {
 	public static String BASE_SERVER_PATH="http://www.mobile.sklgroup.cn/services";
 	public static String SERVER ="61.183.130.134";
 	public static int PORT =801;
-	public static String PATH="/mobile/messageAction!index.action?";
-	public static String INDEX_PATH = "/mobile/login!index.action";
+	public static String PATH="/s.action?";
+	public static String INDEX_PATH = "/m?";
 	public static boolean FIRST_RUN = true;
+	public static boolean ENABLE_PUSH = true;
 	
 	public static String CACHE_PATH="mnt/sdcard/.cache";
 	public static String DOWNLOAD_PATH="mnt/sdcard/download";

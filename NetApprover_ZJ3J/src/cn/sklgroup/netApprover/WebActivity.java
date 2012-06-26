@@ -48,6 +48,8 @@ public class WebActivity extends BaseActivity {
 		Intent data = getIntent();
 		if(data.hasExtra(EXTRA_LINK)){
 			url = data.getStringExtra(EXTRA_LINK);
+		}else{
+			url += "u="+AppSetting.USER+"&p="+AppSetting.PASSWORD;
 		}
 		webview.loadUrl(url);
 	}
@@ -172,7 +174,10 @@ public class WebActivity extends BaseActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 1, 1, R.string.GENERAL_SET);
-		menu.add(0, 2, 2, R.string.GENERAL_CLOSE);
+		if(AppSetting.ENABLE_PUSH)
+			menu.add(0, 2, 2, R.string.DISABLE_PUSH);
+		else
+			menu.add(0, 2, 2, R.string.ENABLE_PUSH);
 		menu.add(0, 3, 3, R.string.GENERAL_EXIT);
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -186,7 +191,10 @@ public class WebActivity extends BaseActivity {
 			startActivity(intent);
 		}else if(item.getItemId()==2){
 			Intent intent = new Intent(this,BootReceiver.class);
-			intent.setAction(Intent.ACTION_CALL_BUTTON);
+			if(AppSetting.ENABLE_PUSH)
+				intent.setAction(Intent.ACTION_CALL_BUTTON);
+			else
+				intent.setAction(Intent.ACTION_MEDIA_BUTTON);
 			sendBroadcast(intent);
 			this.finish();
 		}
