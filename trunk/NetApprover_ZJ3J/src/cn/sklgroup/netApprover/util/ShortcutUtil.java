@@ -35,7 +35,8 @@ public class ShortcutUtil {
 	        if(c!=null && c.getCount()>0){
 	            isInstallShortcut = true ;
 	        }
-	        c.close();
+	        if(c!=null && !c.isClosed())
+	        	c.close();
 	        return isInstallShortcut ;
 	}
 	
