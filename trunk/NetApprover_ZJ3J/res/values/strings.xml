@@ -79,14 +79,14 @@
 	<string name="BACK_RUN">程序启动</string>
 	
 	<string-array name="SERVICE_INTERVAL">
+		<item>1分钟</item>
 		<item>3分钟</item>
-		<item>30分钟</item>
-		<item>1小时</item>
+		<item>15分钟</item>
 	</string-array>
 	<integer-array name="SERVICE_INTERVAL_I">
+		<item>60000</item>
 		<item>180000</item>
-		<item>1800000</item>
-		<item>3600000</item>
+		<item>900000</item>
 	</integer-array>
 	<string name="ENABLE_PUSH">开启推送</string>
 	<string name="DISABLE_PUSH">关闭推送</string>

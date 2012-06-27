@@ -38,8 +38,8 @@ import cn.sklgroup.netApprover.util.JSONUtil;
 
 public class DataService extends Service{
 	private static String TAG= DataService.class.getSimpleName(); 
-	private static boolean init=true;
-	private static int lastNumber=0;
+	public static boolean init=true;
+	public static int lastNumber=0;
 	private String IMEI="";
 	
 	private NotificationManager notificationManager;
