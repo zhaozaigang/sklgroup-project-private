@@ -79,7 +79,7 @@ public class LoginActivity extends BaseActivity {
     public void startDataService(){
     	
     	Intent intent = new Intent(this,BootReceiver.class);
-		//PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    	intent.setAction(Intent.ACTION_MEDIA_BUTTON);
 		sendBroadcast(intent);
     }
     private void login(){
