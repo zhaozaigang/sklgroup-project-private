@@ -16,7 +16,7 @@ public class BootReceiver extends BroadcastReceiver {
     private PendingIntent mAlarmSender;
     private AlarmManager am;
     private static boolean CLOSE = false;
-    
+    private static boolean FIRST_START;
     @Override
     public void onReceive(Context context, Intent intent) {
     	

@@ -24,23 +24,23 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 import cn.sklgroup.netApprover.R;
 import cn.sklgroup.netApprover.WebActivity;
 import cn.sklgroup.netApprover.util.AppSetting;
+import cn.sklgroup.netApprover.util.DeviceUtil;
 import cn.sklgroup.netApprover.util.JSONUtil;
 
 public class DataService extends Service{
 	private static String TAG= DataService.class.getSimpleName(); 
 	public static boolean init=true;
 	public static int lastNumber=0;
-	private String IMEI="";
 	
 	private NotificationManager notificationManager;
 	
@@ -53,12 +53,7 @@ public class DataService extends Service{
 	
 	@Override
 	public void onStart(Intent intent, int startId) {
-		Log.v(TAG, "START"+startId);
-		
-		if(IMEI==null || "".equals(IMEI)){
-			TelephonyManager telMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE); 
-			IMEI = telMgr.getDeviceId();
-		}
+		Log.v(TAG, "START:"+startId);
 		
 		new Thread(new Runnable(){
 			@Override
@@ -73,7 +68,6 @@ public class DataService extends Service{
 							result = request(new String[]{"s","m"},new String[]{"a",AppSetting.USER});
 							init = true;
 						}
-						Log.d(TAG, result);
 						
 						if(!"".equals(result)){
 							Map<String,?> json = (Map<String, ?>) JSONUtil.decode(result);
@@ -95,6 +89,24 @@ public class DataService extends Service{
 					}
 	
 		}}).start();
+		if(Intent.ACTION_PICK.equals(intent.getAction())){
+			new Thread(new Runnable(){
+				@Override
+				public void run() {
+					
+						try {
+							boolean updateFlag = checkVersion(AppSetting.USER, AppSetting.PASSWORD);
+							String url = "http://" +AppSetting.SERVER +":"+AppSetting.PORT+""+AppSetting.UPDATE_PATH;
+							if(updateFlag)
+								showNotification(getResources().getString(R.string.GENERAL_TIP), 
+										getResources().getString(R.string.GENERAL_MSG_VERSION_NEW),url);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		
+			}}).start();
+		}
 	}
 	private final int MESSAGE_NOTIFI = 0x12300; 
 	Handler handler = new Handler(){
@@ -119,7 +131,7 @@ public class DataService extends Service{
 	};
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
@@ -136,7 +148,7 @@ public class DataService extends Service{
 		if(bundle.containsKey("len"))
 			number = bundle.getString("len");
 		
-		Notification notification = new Notification(R.drawable.notify_icon,title,System.currentTimeMillis());
+		Notification notification = new Notification(R.drawable.notify_icon,message,System.currentTimeMillis());
 		notification.flags = Notification.FLAG_NO_CLEAR
 		| Notification.FLAG_ONGOING_EVENT;
 		Intent intent = new Intent();
@@ -167,30 +179,37 @@ public class DataService extends Service{
 			notification.number =len;
 			if(lastNumber!=len){
 				notification.defaults = Notification.DEFAULT_ALL;
+				lastNumber = len;
+				mfm.notify(R.string.app_name, notification);
 			}
-			lastNumber = len;
-			mfm.notify(R.string.app_name, notification);
 		}else{
 			notification.number =0;
 			mfm.cancel(R.string.app_name);
 		}
 		
 	}
-	private void showNotification(String title,String remark,String link){
-		String txt = getResources().getString(R.string.BACK_RUN);
-		Notification notification = new Notification(R.drawable.notify_icon,txt,System.currentTimeMillis());
+	
+	
+	
+	private void showNotification(String title,String message,String link){
+		
+		Notification notification = new Notification(R.drawable.notify_icon,message,System.currentTimeMillis());
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		notification.defaults = Notification.DEFAULT_ALL;
 		
 		Intent intent = new Intent();
-		intent.putExtra(WebActivity.EXTRA_LINK, link);
+		if(!"".equals(link)){
+			 Uri uri = Uri.parse(link);  
+			 intent.setAction(Intent.ACTION_VIEW);
+			 intent.setData(uri);
+		}
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		notification.setLatestEventInfo(this,title, remark, pendingIntent);
+		notification.setLatestEventInfo(this,title, message, pendingIntent);
 //		
 		RemoteViews remoteViews = new RemoteViews(this.getPackageName(),R.layout.notifying_item);
 		
 		remoteViews.setTextViewText(R.id.list_item_title,title);
-		remoteViews.setTextViewText(R.id.list_item_remark,remark);
+		remoteViews.setTextViewText(R.id.list_item_remark,message);
 		
 		notification.contentView  = remoteViews;
 		int  id = (int)System.currentTimeMillis();
@@ -202,7 +221,6 @@ public class DataService extends Service{
 		mfm.cancel(R.string.app_name);
 	}
 	
-	
 	public static boolean login(String loginame,String password){
 		Map<String,?> data = null;
 		boolean result = false;
@@ -212,6 +230,7 @@ public class DataService extends Service{
 			result = "1".equals(data.get("s")+"");
 			if(!result)
 				throw new RuntimeException(data.get("m")+"");
+			
 		}catch (Exception e) {
 			if(data==null)
 				throw new RuntimeException("连接网络失败",e);
@@ -219,6 +238,27 @@ public class DataService extends Service{
 		return result;
 	}
 	
+	public static boolean checkVersion(String loginame,String password){
+		Map<String,?> data = null;
+		boolean result = false;
+		String serverVer = "1.0";
+		String localVer = DeviceUtil.getInstance().getDetail().get(DeviceUtil.APP_VERSION);
+		try{
+			String jsonStr =  DataService.request(new String[]{"s","u"});
+			data = (Map<String, ?>) JSONUtil.decode(jsonStr);
+			result = "1".equals(data.get("s")+"");
+			serverVer = data.get("v")+"";
+			if(!result)
+				throw new RuntimeException(data.get("m")+"");
+			else{
+				result = !serverVer.equals(localVer);
+			}
+		}catch (Exception e) {
+			if(data==null)
+				throw new RuntimeException("连接网络失败",e);
+		}
+		return result;
+	}
 	
 	public static String request(String[]... args){
 		

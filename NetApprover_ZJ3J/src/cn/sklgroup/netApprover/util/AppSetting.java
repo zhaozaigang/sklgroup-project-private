@@ -27,6 +27,7 @@ public class AppSetting {
 	public static int PORT =801;
 	public static String PATH="/s.action?";
 	public static String INDEX_PATH = "/m?";
+	public static String UPDATE_PATH = "/s.action?s=d";
 	public static boolean FIRST_RUN = true;
 	public static boolean ENABLE_PUSH = true;
 	

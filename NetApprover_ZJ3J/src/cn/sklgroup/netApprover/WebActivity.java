@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import cn.sklgroup.netApprover.base.BaseActivity;
 import cn.sklgroup.netApprover.services.BootReceiver;
+import cn.sklgroup.netApprover.services.DataService;
 import cn.sklgroup.netApprover.util.AppSetting;
 import cn.sklgroup.netApprover.util.CrashHandler;
 
@@ -51,6 +52,9 @@ public class WebActivity extends BaseActivity {
 		}else{
 			url += "u="+AppSetting.USER+"&p="+AppSetting.PASSWORD;
 		}
+		Intent intent = new Intent(this, DataService.class);
+		intent.setAction(Intent.ACTION_PICK);
+		startService(intent);
 		webview.loadUrl(url);
 	}
 	@Override
