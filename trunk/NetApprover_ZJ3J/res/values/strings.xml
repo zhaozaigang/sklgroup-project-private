@@ -43,6 +43,7 @@
 	<string name="GENERAL_MSG_UPLOAD_SUCCESS">上传成功</string>
 	<string name="GENERAL_MSG_UPLOAD_FAIL">上传失败</string>
 	<string name="GENERAL_MSG_NO_DATA_UPLOAD">无数据上传</string>
+	<string name="GENERAL_MSG_VERSION_NEW">发现新版本!请及时更新</string>
 	<string name="GENERAL_EMPTY">无查询结果</string>
 	
 	<string name="GENERAL_USERNAME">账号</string>

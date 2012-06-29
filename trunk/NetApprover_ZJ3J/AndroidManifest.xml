@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="cn.sklgroup.netApprover"
       android:versionCode="1"
-      android:versionName="1.0">
+      android:versionName="1.2">
     <uses-sdk android:minSdkVersion="7" />
 	
     <application android:icon="@drawable/icon" android:label="@string/app_name"
@@ -19,6 +19,7 @@
 		<activity android:name=".TaskDetailActivity"/>
 		<activity android:name=".TaskInfoActivity"/>
 		<activity android:name=".TaskCommentActivity"/>
+		<activity android:name=".TaskSendActivity"/>
 		<activity android:name=".TaskSendActivity"/>
 		<activity android:name=".WebActivity" android:configChanges="keyboardHidden|orientation">
 			

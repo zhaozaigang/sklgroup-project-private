@@ -1,6 +1,5 @@
 package cn.sklgroup.netApprover;
 
-import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -27,7 +26,7 @@ import cn.sklgroup.netApprover.services.BootReceiver;
 import cn.sklgroup.netApprover.services.DataService;
 import cn.sklgroup.netApprover.util.AppSetting;
 import cn.sklgroup.netApprover.util.CrashHandler;
-import cn.sklgroup.netApprover.util.JSONUtil;
+import cn.sklgroup.netApprover.util.DeviceUtil;
 import cn.sklgroup.netApprover.util.ShortcutUtil;
 
 public class ConfigActivity extends BaseActivity {
@@ -69,7 +68,7 @@ public class ConfigActivity extends BaseActivity {
 		txtInterval.setTag(intervals[0]);
 		
 		CrashHandler.getInstance().init(getApplicationContext());
-		
+		DeviceUtil.getInstance().init(getApplicationContext());
     }
     
     @Override

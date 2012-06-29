@@ -23,6 +23,19 @@ import android.view.WindowManager;
  * 2012-1-17
  */
 public class DeviceUtil {
+	
+	public final static String APP_ID ="APP_ID";
+	public final static String APP_VERSION="APP_VERSION";
+	public final static String APP_CODE="APP_CODE";
+	public final static String IMEI="IMEI";
+	public final static String PHONE="PHONE";
+	public final static String MODEL="MODEL";
+	public final static String SDK="SDK";
+	public final static String RESOLUTION="RESOLUTION";
+	public final static String DEVICE="DEVICE";
+	public final static String DISPLAY="DISPLAY";
+	
+	
 	private DeviceUtil(){}
 	
 	private static HashMap<String,String> DERVICE_DETAIL= null;
