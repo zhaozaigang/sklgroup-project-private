@@ -180,7 +180,7 @@ public class ConfigActivity extends BaseActivity {
 						AppSetting.DATA_SERVICE_INTERVAL = Integer.parseInt(txtInterval.getTag().toString());
 					AppSetting.saveSetting(getApplicationContext());
 					startDataService();
-					finish();
+					
 				} catch (Exception e) {
 					showToast(R.string.GENERAL_LOGIN_ERROR);
 				}finally{
