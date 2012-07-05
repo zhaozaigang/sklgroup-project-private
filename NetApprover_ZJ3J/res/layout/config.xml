@@ -26,11 +26,11 @@
 		 <TextView android:layout_span="2"  android:text="基本设置" style="@style/TextView.Label" />
 		 <TableRow style="@style/Field.First"  >
 		 	<TextView style="@style/FieldName.Required"  android:text="用户名:" />
-		 	<EditText style="@style/FieldValue.Edit" android:id="@+id/edit_loginame" android:hint="@string/HINT_LOGINAME" />
+		 	<EditText style="@style/FieldValue.Edit" android:singleLine="true"  android:id="@+id/edit_loginame" android:hint="@string/HINT_LOGINAME" />
 		 </TableRow>
 		 <TableRow style="@style/Field.Last"  >
 		 	<TextView style="@style/FieldName.Required"  android:text="密码:" />
-		 	<EditText style="@style/FieldValue.Edit" android:id="@+id/edit_password" android:hint="@string/HINT_PASSWORD" />
+		 	<EditText style="@style/FieldValue.Edit" android:singleLine="true" android:id="@+id/edit_password" android:hint="@string/HINT_PASSWORD" />
 		 </TableRow>
 		 <TextView android:layout_span="2"  android:text="高级设置" style="@style/TextView.Label" />
 		 <TableRow style="@style/Field.First" >
