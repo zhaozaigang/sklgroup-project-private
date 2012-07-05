@@ -40,8 +40,9 @@ import cn.sklgroup.netApprover.util.JSONUtil;
 public class DataService extends Service{
 	private static String TAG= DataService.class.getSimpleName(); 
 	public static boolean init=true;
-	public static int lastNumber=0;
-	
+	public static int lastNumber=-1;
+	public static String lastTitle=""; 
+	public static final int NOTIFY_UPDATE= 0x1111;
 	private NotificationManager notificationManager;
 	
 	@Override
@@ -74,6 +75,7 @@ public class DataService extends Service{
 							if("1".equals(json.get("s")+"")){
 								if("".equals(json.get("t")))
 									return;
+					
 								Message msg= handler.obtainMessage(MESSAGE_NOTIFI);
 								Bundle bundle = new Bundle();
 								bundle.putString("title", json.get("t")+"");
@@ -98,7 +100,7 @@ public class DataService extends Service{
 							boolean updateFlag = checkVersion(AppSetting.USER, AppSetting.PASSWORD);
 							String url = "http://" +AppSetting.SERVER +":"+AppSetting.PORT+""+AppSetting.UPDATE_PATH;
 							if(updateFlag)
-								showNotification(getResources().getString(R.string.GENERAL_TIP), 
+								showNotification(NOTIFY_UPDATE,getResources().getString(R.string.GENERAL_TIP), 
 										getResources().getString(R.string.GENERAL_MSG_VERSION_NEW),url);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -172,9 +174,10 @@ public class DataService extends Service{
 		
 		Intent clickIntent = new Intent(context, BootReceiver.class);
 		clickIntent.setAction(Intent.ACTION_CALL_BUTTON);
-		notification.contentView.setOnClickPendingIntent(R.id.btn_exit, PendingIntent.getBroadcast(context, 1, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		notification.contentView.setOnClickPendingIntent(R.id.btn_exit, 
+				PendingIntent.getBroadcast(context, 1, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		
-		if(!"".equals(number)){
+		if(!"".equals(number) && !"0".equals(number)){
 			int len = Integer.parseInt(number);
 			notification.number =len;
 			if(lastNumber!=len){
@@ -191,7 +194,7 @@ public class DataService extends Service{
 	
 	
 	
-	private void showNotification(String title,String message,String link){
+	private void showNotification(int id,String title,String message,String link){
 		
 		Notification notification = new Notification(R.drawable.notify_icon,message,System.currentTimeMillis());
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
@@ -205,14 +208,14 @@ public class DataService extends Service{
 		}
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		notification.setLatestEventInfo(this,title, message, pendingIntent);
-//		
+		
 		RemoteViews remoteViews = new RemoteViews(this.getPackageName(),R.layout.notifying_item);
 		
 		remoteViews.setTextViewText(R.id.list_item_title,title);
 		remoteViews.setTextViewText(R.id.list_item_remark,message);
 		
 		notification.contentView  = remoteViews;
-		int  id = (int)System.currentTimeMillis();
+		//int  id = (int)System.currentTimeMillis();
 		notificationManager.notify(id, notification);
 	}
 	public static void cancelNotification(Context context){

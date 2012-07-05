@@ -44,7 +44,8 @@ public class BootReceiver extends BroadcastReceiver {
 	    			//DataService.lastNumber = 0;
 	    			CLOSE = false;
 	    			DataService.init =true;
-	    			DataService.lastNumber = 0;
+	    			DataService.lastNumber = -1;
+	    			
 	    		}
 	    		if(AppSetting.FIRST_RUN || CLOSE)
 	    			return;
@@ -52,7 +53,7 @@ public class BootReceiver extends BroadcastReceiver {
 				Toast.makeText(context,R.string.ENABLE_PUSH, Toast.LENGTH_SHORT).show();
 			       
 	    		context.startService(new Intent(context, DataService.class));
-	    		int interval = AppSetting.DATA_SERVICE_INTERVAL/2;
+	    		int interval = AppSetting.DATA_SERVICE_INTERVAL;
 				
 	    		am.cancel(mAlarmSender);
 				long firstTime = SystemClock.elapsedRealtime();
