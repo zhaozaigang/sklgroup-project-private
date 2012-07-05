@@ -1,5 +1,7 @@
 package cn.sklgroup.netApprover;
 
+import java.text.BreakIterator;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -28,8 +30,10 @@ public class WebActivity extends BaseActivity {
 	private static final String TAG = ChromeClient.class.getSimpleName();
 	private static final int DIALOG_LADING = 0x123;
 	private static final int DIALOG_EXIT = 0x124;
+	private static final int REQUEST_EDIT = 0x125;
 	private WebView webview;
 	private ProgressBar progressBar;
+	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -57,12 +61,23 @@ public class WebActivity extends BaseActivity {
 		startService(intent);
 		webview.loadUrl(url);
 	}
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
 		if(CrashHandler.reportExists(this)){
 			CrashHandler.sendCrashReport(this);
 			return ;
+		}
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode==RESULT_CANCELED)
+			return;
+		if(requestCode==REQUEST_EDIT){
+			String url = "http://" +AppSetting.SERVER +":"+AppSetting.PORT+""+AppSetting.INDEX_PATH;
+			url += "u="+AppSetting.USER+"&p="+AppSetting.PASSWORD;
+			webview.loadUrl(url);
 		}
 	}
 	@Override
@@ -192,7 +207,7 @@ public class WebActivity extends BaseActivity {
 		}else if(item.getItemId()==1){
 			Intent intent = new Intent(this,ConfigActivity.class);
 			intent.setAction(Intent.ACTION_EDIT);
-			startActivity(intent);
+			startActivityForResult(intent,REQUEST_EDIT);
 		}else if(item.getItemId()==2){
 			Intent intent = new Intent(this,BootReceiver.class);
 			if(AppSetting.ENABLE_PUSH)

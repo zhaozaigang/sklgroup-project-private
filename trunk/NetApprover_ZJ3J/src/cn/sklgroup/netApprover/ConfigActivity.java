@@ -155,6 +155,8 @@ public class ConfigActivity extends BaseActivity {
 				try {
 					if(DataService.login(loginame, password))
 						handler.sendEmptyMessage(MESSGE_SUCCESS);
+					else
+						handler.sendEmptyMessage(MESSGE_ERROR);
 				} catch (Exception e) {
 					Message msg = handler.obtainMessage(MESSGE_MESSAGE,e.getMessage());
 					handler.sendMessage(msg);
@@ -179,8 +181,10 @@ public class ConfigActivity extends BaseActivity {
 					if(txtInterval.getTag()!=null)
 						AppSetting.DATA_SERVICE_INTERVAL = Integer.parseInt(txtInterval.getTag().toString());
 					AppSetting.saveSetting(getApplicationContext());
+					DataService.cancelNotification(getApplicationContext());
 					startDataService();
-					
+					setResult(RESULT_OK);
+					finish();
 				} catch (Exception e) {
 					showToast(R.string.GENERAL_LOGIN_ERROR);
 				}finally{
