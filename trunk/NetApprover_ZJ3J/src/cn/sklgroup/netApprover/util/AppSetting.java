@@ -9,7 +9,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
-
+/**
+ * 
+ * @author wanxianze@gmail.com
+ * 2012-5-6
+ */
 public class AppSetting {
 	
 	
