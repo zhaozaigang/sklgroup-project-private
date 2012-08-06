@@ -14,7 +14,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
-
+/**
+ * 
+ * @author wanxianze@gmail.com
+ * 2012-7-3
+ */
 public final class JSONUtil  {
 	
 	/**
